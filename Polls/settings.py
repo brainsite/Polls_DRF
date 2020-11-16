@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'y74^c$jrk8l%lwamt6q*jw20swnun%$ggog5$+1^01%9dfdbod'
+SECRET_KEY = ''
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -81,7 +81,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'polls',
         'USER': 'django',
-        'PASSWORD': '34t3t545g3f4f3',
+        'PASSWORD': '',
         'HOST': 'localhost',
     }
 }
@@ -128,3 +128,9 @@ STATIC_ROOT = '/home/django/Polls/static/'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+try:
+    from .local_settings import *
+except ImportError as e:
+    pass
