@@ -1,0 +1,228 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Rentacar - быстрая аренда машин</title>
+
+    <meta name="keywords" content="HTML5 Template"/>
+    <meta name="description" content="Porto - Bootstrap eCommerce Template">
+    <meta name="author" content="SW-THEMES">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/static/images/icons/favicon.ico">
+
+
+    <script type="text/javascript">
+        WebFontConfig = {
+            google: {families: ['Open+Sans:300,400,600,700,800', 'Poppins:300,400,500,600,700']}
+        };
+        (function (d) {
+            var wf = d.createElement('script'), s = d.scripts[0];
+            wf.src = 'assets/js/webfont.js';
+            wf.async = true;
+            s.parentNode.insertBefore(wf, s);
+        })(document);
+    </script>
+
+    <!-- Plugins CSS File -->
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+
+    <!-- Main CSS File -->
+    <link rel="stylesheet" href="/static/css/style.min.css">
+    <link rel="stylesheet" href="/static/vendor/fontawesome-free/css/all.min.css">
+        <link rel="icon" href="/static/images/favicon.png" type="image/x-icon">
+<link rel="shortcut icon" type="image/x-icon" href="/static/images/favicon.png">
+</head>
+<body>
+<div class="page-wrapper">
+    <header class="header">
+        <div class="header-top">
+            <div class="container">
+                <div class="header-left header-dropdowns">
+
+
+                    <div class="header-dropdown">
+                        <a href="#">Русский</a>
+                        <div class="header-menu">
+                            <ul>
+                                <li><a href="#">ENGLISH</a></li>
+                                <li><a href="#">Русский</a></li>
+                            </ul>
+                        </div><!-- End .header-menu -->
+                    </div><!-- End .header-dropown -->
+                </div><!-- End .header-left -->
+                <div class="header-right">
+                    <ul>
+
+                        {% if user.is_authenticated %}
+                            <li>Вошли как: <a href="/my_account">{{ user.username }}</a> / <a href="/logout">Выйти</a></li>
+
+                        {% else %}
+                            <li><a href="/login">Войдите в систему</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+
+            </div>
+        </div><!-- End .header-top -->
+
+        <div class="header-middle sticky-header">
+            <div class="container">
+                <div class="header-left">
+                    <button class="mobile-menu-toggler" type="button">
+                        <i class="icon-menu"></i>
+                    </button>
+                    <a href="/" class="logo">
+                        <img src="/static/images/logo.png" alt="Porto Logo">
+                    </a>
+                    <nav class="main-nav">
+                        <ul class="menu">
+                            <li>
+                                <a href="/">Главная</a>
+                            </li>
+
+                              <li>
+                                <a href="/add_car">Добавить машину</a>
+                            </li>
+
+                              <li>
+                                <a href="/my_account">Мой кабинет</a>
+                            </li>
+
+                        </ul>
+                    </nav>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="header-bottom">
+            <div class="col-lg-4">
+                <div class="service-widget">
+                    <i class="service-icon icon-country"></i>
+                    <div class="service-content">
+                        <h3 class="service-title">Быстрая регистрация</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="service-widget">
+                    <i class="service-icon icon-rouble"></i>
+                    <div class="service-content">
+                        <h3 class="service-title">Низкие цены</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="service-widget">
+                    <i class="service-icon icon-support"></i>
+                    <div class="service-content">
+                        <h3 class="service-title">Online поддержка 24/7</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header><!-- End .header -->
+
+
+    {% block content %}
+    {% endblock %}
+
+
+    <footer class="footer">
+
+
+        <div class="footer-top">
+            <div class="container">
+                <div class="newsletter-widget">
+                    <i class="icon-envolope"></i>
+
+                    <div class="newsletter-info">
+
+                    </div>
+
+
+                </div>
+
+                <div class="social-icons">
+
+                </div>
+            </div>
+        </div>
+        <div class="footer-middle">
+            <div class="container">
+                <div class="row row-sm">
+                    <div class="col-md-6 col-lg-3">
+                        <img src="/static/images/logo.png">
+                        <p>Быстрая аренда машин</p>
+                        <div class="social-link">
+                            <h3 class="link-title">Есть вопросы?</h3>
+                            <a href="#">8-800-777-45-66</a>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="widget">
+                            <h3 class="widget-title">Мой кабинет</h3>
+                            <div class="widget-content row row-sm">
+                                <ul class="col-xl-6">
+                                    <li><a href="/my_account">Моя информация</a></li>
+                                     <li><a href="/add_car">Добавить машину</a></li>
+
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="widget">
+
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="widget">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom container">
+            <p>Rentacar. © 2020. All Rights Reserved</p>
+        </div>
+    </footer><!-- End .footer -->
+</div><!-- End .page-wrapper -->
+
+<div class="mobile-menu-overlay"></div><!-- End .mobil-menu-overlay -->
+
+<div class="mobile-menu-container">
+    <div class="mobile-menu-wrapper">
+        <span class="mobile-menu-close"><i class="icon-retweet"></i></span>
+        <nav class="mobile-nav">
+            <ul class="mobile-menu">
+                <li class="active"><a href="/">Главная</a></li>
+            </ul>
+        </nav><!-- End .mobile-nav -->
+
+        <div class="social-icons">
+
+        </div><!-- End .social-icons -->
+    </div><!-- End .mobile-menu-wrapper -->
+</div><!-- End .mobile-menu-container -->
+
+<a id="scroll-top" href="#top" title="Top" role="button"><i class="icon-angle-up"></i></a>
+
+<!-- Plugins JS File -->
+<script src="/static/js/jquery.min.js"></script>
+<script src="/static/js/bootstrap.bundle.min.js"></script>
+<script src="/static/js/plugins.min.js"></script>
+<script src="/static/js/plugins/isotope-docs.min.js"></script>
+
+<!-- Main JS File -->
+<script src="/static/js/main.min.js"></script>
+</body>
+</html>

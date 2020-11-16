@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="478fac3f-1b40-47c6-b0ed-9bd24177e14e" name="poll" url="http://brainsite.ru">
+        <fileTransfer host="brainsite.ru" port="22" rootFolder="/home/django/Polls" accessType="SFTP" username="root">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
