@@ -7,19 +7,13 @@ router = routers.DefaultRouter()
 
 urlpatterns = [
     path('', include(router.urls)),
+    path("polls/", views_rest.PollList.as_view(), name="polls_list"),
+    path("polls/<int:pk>/", views_rest.PollDetail.as_view(), name="polls_detail"),
+    path("polls/<int:pk>/quest/", views_rest.QuestList.as_view(), name="choice_list"),
+    path("polls/<int:pk>/quest/<int:quest_pk>/answer/", views_rest.AnswersList.as_view(), name="choice_quest"),
+    path("polls/<int:pk>/quest/<int:quest_pk>/answer/<int:choice_pk>/vote/", views_rest.CreateVote.as_view(), name="create_vote"),
 
+    path("user_polls/", views_rest.UserPollsList.as_view(), name="user_polls_list"),
 
-    path('polls/', views_rest.PollsListAPIViews.as_view()),
-
-    # FOR ADMINS
-    path('polls_all/', views_rest.PollsAdminsListAPIView.as_view()),
-    path('polls_all/<int:pk>/', views_rest.PollsAdminsDetailAPIView.as_view()),
-    path('questions/<int:pk>/', views_rest.QuestionsAdminsDetailAPIView.as_view()),
-    path('answer/<int:pk>/', views_rest.AnswerAdminsDetailAPIView.as_view()),
-
-    # ADD URLS
-    path("add_polls/", views_rest.AddPollsView.as_view()),
-    path("add_questions/", views_rest.AddQuestionsView.as_view()),
-    path("add_answer/", views_rest.AddAnswerView.as_view()),
 
 ]

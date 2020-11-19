@@ -2,7 +2,7 @@ import datetime
 
 from rest_framework import serializers
 
-from .models import PollsDB, Questions, Answers
+from .models import PollsDB, Questions, Answers, UserAnswer, Users
 
 
 class FilterActivePollSerializer(serializers.ListSerializer):
@@ -13,102 +13,47 @@ class FilterActivePollSerializer(serializers.ListSerializer):
         return super().to_representation(data)
 
 
+class UsersSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Users
+        fields = '__all__'
+
+
 class AnswerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Answers
-        fields = ['id', 'answer_text']
+        fields = '__all__'
 
 
 class QuestionsSerializer(serializers.ModelSerializer):
-    answers = AnswerSerializer(many=True)
+    answers = AnswerSerializer(many=True, read_only=True, required=False)
 
     class Meta:
         model = Questions
-        fields = ['id', 'question_text', 'type_quest', 'answers']
+        fields = '__all__'
 
 
 class PollsSerializer(serializers.ModelSerializer):
-    """Serializer Опросов для Админа"""
-    questions = QuestionsSerializer(many=True)
-
-    class Meta:
-        model = PollsDB
-        fields = ['id', 'name_poll', 'description_text', 'date_start', 'date_end', 'questions']
-
-
-class PollsAdminSerializer(serializers.ModelSerializer):
-    """DetailSerializer Опросов для Админа"""
-
-    class Meta:
-        model = PollsDB
-        fields = ['id', 'name_poll', 'description_text', 'date_start', 'date_end']
-
-class QuestionsAdminSerializer(serializers.ModelSerializer):
-    """DetailSerializer Вопросов для Админа"""
-
-    class Meta:
-        model = Questions
-        fields = ['id', 'polls_id', 'question_text', 'type_quest']
-
-class AnswerAdminSerializer(serializers.ModelSerializer):
-    """DetailSerializer Ответов для Админа"""
-
-    class Meta:
-        model = Answers
-        fields = ['id', 'quest_id', 'answer_text']
-
-class PollsDetailSerializer(serializers.ModelSerializer):
-    """Serializer Опросов для всех"""
-    questions = QuestionsSerializer(many=True)
+    questions = QuestionsSerializer(many=True, required=False)
 
     class Meta:
         list_serializer_class = FilterActivePollSerializer
         model = PollsDB
-        fields = ['id', 'name_poll', 'description_text', 'date_start', 'date_end', 'questions']
+        fields = '__all__'
 
 
-class CreatePollsSerializer(serializers.ModelSerializer):
-    """Добавление опроса"""
+class UserAnswerSerializer(serializers.ModelSerializer):
+    # user_polls = PollsSerializer(many=True)
+    class Meta:
+        model = UserAnswer
+        fields = '__all__'
+
+
+class UserAnsSerializer(serializers.ModelSerializer):
+    id_polls = serializers.SlugRelatedField(slug_field="name_poll", read_only=True, help_text='Название опроса')
+    id_quest = serializers.SlugRelatedField(slug_field="question_text", read_only=True, help_text='Вопрос')
+    id_answer = serializers.SlugRelatedField(slug_field="answer_text", read_only=True, help_text='Ответ')
 
     class Meta:
-        model = PollsDB
-        fields = ('name_poll', 'description_text', 'date_start', 'date_end')
-
-    def create(self, validated_data):
-        polls, _ = PollsDB.objects.update_or_create(
-            name_poll=validated_data.get('name_poll', None),
-            description_text=validated_data.get('description_text', None),
-            date_start=validated_data.get('date_start', None),
-            date_end=validated_data.get('date_end', None),
-        )
-        return polls
-
-class CreateQuestionsSerializer(serializers.ModelSerializer):
-    """Добавление вопросов к опросу"""
-
-    class Meta:
-        model = Questions
-        fields = ("polls_id", "question_text", "type_quest")
-
-    def create(self, validated_data):
-        question, _ = Questions.objects.update_or_create(
-            question_text=validated_data.get('question_text', None),
-            polls_id=validated_data.get('polls_id', None),
-            type_quest=validated_data.get('type_quest', None),
-        )
-        return question
-
-
-class CreateAnswerSerializer(serializers.ModelSerializer):
-    """Добавление ответов к вопросу"""
-
-    class Meta:
-        model = Answers
-        fields = ("quest_id", "answer_text")
-
-    def create(self, validated_data):
-        answer, _ = Answers.objects.update_or_create(
-            answer_text=validated_data.get('answer_text', None),
-            quest_id=validated_data.get('quest_id', None),
-        )
-        return answer
+        model = UserAnswer
+        fields = '__all__'

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" serverName="poll">
+  <component name="PublishConfigData" serverName="poll" uploadOnCheckin="478fac3f-1b40-47c6-b0ed-9bd24177e14e">
     <serverData>
       <paths name="poll">
         <serverdata>
@@ -10,5 +10,6 @@
         </serverdata>
       </paths>
     </serverData>
+    <option name="myUploadOnCheckinName" value="poll" />
   </component>
 </project>
